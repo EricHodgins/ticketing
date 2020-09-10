@@ -1,0 +1,21 @@
+# This should not be needed for Production
+# This is just for minikube to work!
+# http://ingress-nginx.kube-system.svc.cluster.local/api/users/currentuser
+# or http://{service}.{namespace}.svc.cluster.local/{URI}
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ingress-nginx
+  name: ingress-nginx
+  namespace: kube-system
+spec:
+  selector:
+    app.kubernetes.io/name: nginx-ingress-controller
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  type: ClusterIP
